@@ -1,0 +1,49 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background-color: #F3F9FF;
+  font-family: Lora;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+h2 {
+  margin: 0;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, .4);
+  font-size: 1.8em;
+  text-align: center;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+li {
+  background-color: #ffffff;
+  padding: 1rem 2rem 0.5rem 2rem;
+  margin-top: 1rem;
+}
+
+p {
+  font-size: 12px;
+  text-align: right;
+}
+
+span {
+  font-size: 16px;
+}
+
+input[type="checkbox"]{
+  margin: 1rem;
+}
+
+.complete-true {
+  text-decoration: line-through;
+  color: #000;
+}
