@@ -38,29 +38,29 @@ app.service('TaskService', function(){
     tasks.push(task);
   };
 
-  this.getTask = function() {
-    return tasks;
-  }
+  this.deleteTask = function(id){
+    for (task in tasks) {
+      if (tasks[task].id == id){
+        tasks.splice(task, 1);
+      }
+    }
+  };
 
+  this.getTasks = function() {
+    return tasks;
+  };
 });
 
 app.controller('TaskController', function($scope, TaskService){
-  $scope.tasks = TaskService.getTask();
+  $scope.tasks = TaskService.getTasks();
 
   $scope.addTask = function(){
     TaskService.addTask($scope.newTask);
     $scope.newTask = {};
   };
-});
 
-// app.controller('deleteController', function(){
-//   this.filterTask = function(){
-//
-//
-//     // this.evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
-//     this.tasks = _.filter(tasks, function(task){
-//       return task.complete == false;
-//     });
-//     console.log(this.tasks)
-//   }
-// });
+  $scope.deleteTask = function(id){
+    TaskService.deleteTask(id);
+    if ($scope.newTask.id == id) $scope.newTask = {};
+  }
+});

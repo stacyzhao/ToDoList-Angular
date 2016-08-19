@@ -13,7 +13,7 @@
       <div class="col-sm-6" id=listwrapper>
         <li ng-repeat="task in tasks">
           <input type="checkbox" ng-model="task.complete"/>
-          {{task.id}}:{{task.title}}, {{task.createdOn | date}}, {{task.complete}}
+          {{task.id}}:{{task.title}}, {{task.createdOn | date}}, {{task.complete}} || <a href="#" ng-click="deleteTask(task.id)">delete</a>
         </li>
       </div>
       <div class="col-sm-6">
