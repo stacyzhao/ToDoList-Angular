@@ -1,53 +1,22 @@
 html {
   min-height: 100%;
-  font-family: 'Raleway', sans-serif;
+
 }
-#listwrapper{
-  background: #F3F9FF;
-  padding: 2em;
-}
+
 body {
-  background: #fff;
-
-}
-
-h1 {
-  text-align: center;
-  padding: 20px;
-}
-
-h2 {
-  margin: 0;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, .5);
-  font-size: 1.8em;
-  text-align: center;
-}
-
-ul, li {
-  list-style-type: none;
+  background-color: #73C1C6;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
 }
 
 li {
-  background-color: rgba(255, 255, 255, .4);
+  background-color: #fff;
+  list-style-type: none;
+  border-bottom: #ff0000;
   padding: 1rem 2rem 0.5rem 2rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
-p {
-  font-size: 12px;
-  text-align: right;
-}
-
-span {
-  font-size: 16px;
-}
-
-input[type="checkbox"]{
-  margin: 1rem;
-}
-
-.complete-true {
-  text-decoration: line-through;
-  color: #000;
+.container {
+  padding-top: 20px;
 }

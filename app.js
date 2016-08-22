@@ -38,6 +38,14 @@ app.service('TaskService', function(){
     tasks.push(task);
   };
 
+  this.editTask =function(id) {
+    for (task in tasks) {
+      if (tasks[task].id == id) {
+        tasks.push(task)
+      }
+    }
+  };
+
   this.deleteTask = function(id){
     for (task in tasks) {
       if (tasks[task].id == id){
@@ -55,12 +63,14 @@ app.controller('TaskController', function($scope, TaskService){
   $scope.tasks = TaskService.getTasks();
 
   $scope.addTask = function(){
-    TaskService.addTask($scope.newTask);
-    $scope.newTask = {};
+    if ($scope.taskForm.$valid){
+      TaskService.addTask($scope.newTask);
+      $scope.newTask = {};
+    }
   };
 
   $scope.deleteTask = function(id){
     TaskService.deleteTask(id);
-    if ($scope.newTask.id == id) $scope.newTask = {};
+    $scope.newTask = {};
   }
 });
