@@ -14,23 +14,26 @@
     <div class="container">
       <div class="col-sm-3">
       </div>
-      <div class="col-sm-6" id=listwrapper>
-        <form name="taskForm">
-          <fieldset class="form-group" ng-class="{ 'has-error' : taskForm.task.$invalid && !taskForm.task.$pristine }">
+      <div class="col-sm-6" id="listwrapper">
+        <h1>Task List</h1>
+        <form name="taskForm" novalidate>
+          <fieldset class="form-group">
             <input type="text" name="task" ng-model="newTask.title" class="form-control" placeholder="Enter Task" required>
           </fieldset>
           <!-- <fieldset class="form-group">
             <textarea ng-model="newTask.description" class="form-control" placeholder="Enter Description" title="description"></textarea>
           </fieldset> -->
-          <p ng-show="taskForm.task.$invalid && !taskForm.task.$pristine" class="help-block">Task is required.</p>
-          <input type="submit" class="btn btn-default" ng-click="addTask()" role="button" value="Add it!"/>
+          <!-- <p ng-show="taskForm.task.$invalid && !taskForm.task.$pristine" class="help-block">Task is required.</p> -->
+          <input type="submit" class="btn btn-default" ng-click="addTask()" ng-disabled="taskForm.$invalid" role="button" value="Add it!"/>
         </form>
         <br />
-        <li ng-repeat="task in tasks">
+        <li ng-repeat="task in tasks | orderBy:'-createdOn'">
           {{task.title}}
-          <br />{{task.createdOn | date}}
-          <i class="fa fa-pencil" aria-hidden="true"></i>
-          <a href="#" ng-click="deleteTask(task.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          <p>
+            {{task.createdOn | date}}
+            <a href="#" ng-click="editTask(task.id)"><i class="fa fa-pencil" aria-hidden="true"></i>
+            <a href="#" ng-click="deleteTask(task.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          </p>
         </li>
       </div>
       <div class="col-sm-3">
