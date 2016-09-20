@@ -1,4 +1,4 @@
-var app = angular.module('taskApp', []);
+var app = angular.module('taskApp', ["firebase"]);
 
 app.service('TaskService', function(){
   var id = 4;
@@ -63,12 +63,17 @@ app.service('TaskService', function(){
   };
 
   this.getTasks = function() {
-    return tasks;
+    return new Promise(function(resolve, reject) { resolve(tasks); });
   };
 });
 
-app.controller('TaskController', function($scope, TaskService){
-  $scope.tasks = TaskService.getTasks();
+app.controller('TaskController', function(TaskService, $scope) {
+
+  // $scope.tasks = TaskService.getTasks();
+  var promise = TaskService.getTasks();
+  promise.then(function(tasks){
+    $scope.tasks = tasks;
+  });
 
   $scope.addTask = function(){
     if ($scope.taskForm.$valid){
