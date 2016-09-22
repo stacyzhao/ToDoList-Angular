@@ -15,7 +15,7 @@
         <h1>What would you like to do?</h1>
         <form name="taskForm" novalidate>
           <fieldset class="form-group">
-            <input type="text" name="task" ng-model="newTask.title" class="form-control" placeholder="Enter Task" required>
+            <input type="text" name="task" ng-model="tasks.title" class="form-control" placeholder="Enter Task" required>
           </fieldset>
           <!-- <fieldset class="form-group">
             <textarea ng-model="newTask.description" class="form-control" placeholder="Enter Description" title="description"></textarea>
@@ -23,8 +23,7 @@
           <!-- <p ng-show="taskForm.task.$invalid && !taskForm.task.$pristine" class="help-block">Task is required.</p> -->
           <input type="submit" class="btn btn-default" ng-click="addTask()" ng-disabled="taskForm.$invalid" role="button" value="Add it!"/>
         </form>
-        <br />
-        <li ng-repeat="task in tasks | orderBy:'-createdOn'">
+        <li ng-repeat="task in getTasks | orderBy:'-createdOn'">
           {{task.title}}
           <p>
             {{task.createdOn | date}}
@@ -36,8 +35,8 @@
       <div class="col-sm-3">
       </div>
     </div>
-    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script src="app.js"></script>
   </body>
