@@ -2,7 +2,7 @@
 <html lang="en-US" ng-app="taskApp">
   <head>
     <title>Just a task list</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -12,23 +12,23 @@
       <div class="col-sm-3">
       </div>
       <div class="col-sm-6" id="listwrapper">
-        <h1>What would you like to do?</h1>
+        <h1>Task List</h1>
         <form name="taskForm" novalidate>
           <fieldset class="form-group">
-            <input type="text" name="task" ng-model="tasks.title" class="form-control" placeholder="Enter Task" required>
+            <input type="text" ng-model="newTask.title" class="form-control" placeholder="What would you like to do?" required/>
           </fieldset>
           <!-- <fieldset class="form-group">
             <textarea ng-model="newTask.description" class="form-control" placeholder="Enter Description" title="description"></textarea>
           </fieldset> -->
           <!-- <p ng-show="taskForm.task.$invalid && !taskForm.task.$pristine" class="help-block">Task is required.</p> -->
-          <input type="submit" class="btn btn-default" ng-click="addTask()" ng-disabled="taskForm.$invalid" role="button" value="Add it!"/>
+          <input type="submit" class="btn btn-default" ng-click="addTask()" ng-disabled="taskForm.$invalid" role="button" value="Add Task!"/>
         </form>
         <li ng-repeat="task in getTasks | orderBy:'-createdOn'">
           {{task.title}}
           <p>
             {{task.createdOn | date}}
-            <a href="#" ng-click="editTask(task.id)"><i class="fa fa-pencil" aria-hidden="true"></i>
-            <a href="#" ng-click="deleteTask(task.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <a href="#" ng-click="editTask(task.$id)"><i class="fa fa-pencil" aria-hidden="true"></i>
+            <a href="#" ng-click="deleteTask(task)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           </p>
         </li>
       </div>

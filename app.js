@@ -1,75 +1,25 @@
 var app = angular.module('taskApp', ["firebase"]);
 
 app.service('TaskService', function(){
-  var id = 4;
+  var id = 0;
 
-  // var tasks = [
-  //   {
-  //     id: 0,
-  //     title: 'Dinner with jackie and brian',
-  //     description: '',
-  //     createdOn: 1394490980834,
-  //     complete: false
-  //   }, {
-  //     id: 1,
-  //     title: 'Lunch with mom',
-  //     description: '',
-  //     createdOn: 1397490980834,
-  //     complete: false
-  //   }, {
-  //     id: 2,
-  //     title: 'Clean and clear closet',
-  //     description: '',
-  //     createdOn: 1394490980834,
-  //     complete: false
-  //   }, {
-  //     id: 3,
-  //     title: 'hand in papers',
-  //     description: '',
-  //     createdOn: 1394490980834,
-  //     complete: false
-  //   }
-  // ];
-
-  this.addTask = function(task){
-
-    task.$add({
-      title: task.title,
-      id: id++,
-      complete: false,
-      createdOn: Date.now()
-    });
-
-    // if (task.id == null){
-    //   task.id = id++;
-    //   task.createdOn = Date.now();
-    //   task.complete = false;
-    //   console.log(task)
-    //   task.$add(task);
-    // } else {
-    //   for (i in tasks) {
-    //     if (tasks[i].id == task.id){
-    //       tasks[i] = task
-    //     }
-    //   }
-    // }
-  };
-
-  this.editTask = function(task){
-    for (i in task) {
-      // if (tasks[i].id == id) {
-      //   return tasks[i]
-      // }
+  this.addTask = function(task, tasks){
+    if (task.$id == null){
+      tasks.$add({
+        title: task.title,
+        id: id++,
+        complete: false,
+        createdOn: Date.now()
+      });
+    } else {
+      console.log("Updating")
+      tasks.$save(task).then(function(){
+        console.log("Updated");
+        }, function(error){
+          console.log("Didn't Work")
+        });
+      // console.log(tasks)
     }
-  };
-
-  this.deleteTask = function(task){
-    task.$remove(task);
-    // for (task in tasks) {
-    //   if (tasks[task].id == id){
-    //     tasks.splice(task, 1);
-    //   }
-    // }
   };
 
   this.getTasks = function(tasks) {
@@ -90,18 +40,18 @@ app.controller('TaskController', function(TaskService, $scope, $firebaseArray) {
 
   $scope.addTask = function(){
     if ($scope.taskForm.$valid){
-      TaskService.addTask($scope.tasks);
+      TaskService.addTask($scope.newTask, $scope.tasks);
     }
-    $scope.tasks = $firebaseArray(ref);
+    $scope.newTask = '';
   };
 
-  $scope.editTask = function(tasks){
-    $scope.tasks = angular.copy(TaskService.editTask($scope.tasks));
+  $scope.editTask = function(id){
+    $scope.newTask = $scope.tasks.$getRecord(id);
   };
 
   $scope.deleteTask = function(task){
-    console.log("1" + task)
-    TaskService.deleteTask(task);
-    $scope.newTask = {};
+    $scope.tasks.$remove(task).then(function(){
+      console.log("Task removed")
+    });
   };
 });
